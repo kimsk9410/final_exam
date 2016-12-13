@@ -6,6 +6,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
+import java.util.RandomAccess;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 // need something here
+                ct.sleep(1000);
             } catch (InterruptedException e) { }
         }
 
@@ -39,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         MyBaseAdapter adapter = new MyBaseAdapter(this, manager.list);
         ListView listview = (ListView) findViewById(R.id.listView1) ;
         listview.setAdapter(adapter);
-
-
     }
 }
 
@@ -52,6 +53,13 @@ class CustomerThread extends Thread{
         this.customer = customer;
     }
     // need something here
+
+
+    @Override
+    public synchronized void run() {
+        super.run();
+        customer.work();
+    }
 }
 
 abstract class Person{
@@ -71,11 +79,18 @@ class Customer extends Person{
     }
 
     // need something here
+    void work(){
+        Random rd = new Random();
+        int sp_money = rd.nextInt(1000);
+        spent_money += sp_money;
+        money -= sp_money;
+    }
 }
 
 
 class Manager extends Person{
     ArrayList <Customer> list = new ArrayList<Customer>();
+    Customer temp_customer = new Customer("");
 
     void add_customer(Customer customer) {
         list.add(customer);
@@ -84,6 +99,18 @@ class Manager extends Person{
     void sort(){ // 직접 소팅 알고리즘을 이용하여 코딩해야함. 자바 기본 정렬 메소드 이용시 감
 
         // need something here
+        for(int i = 0; i < list.size()-1; i++){
+            for(int j = i + 1; j < list.size(); j++){
+                if(list.get(j-1).spent_money > list.get(j).spent_money){
+                    temp_customer.spent_money = list.get(j).spent_money;
+                    temp_customer.name = list.get(j).name;
+                    list.get(j).spent_money = list.get(j-1).spent_money;
+                    list.get(j).name = list.get(j-1).name;
+                    list.get(j-1).spent_money = temp_customer.spent_money;
+                    list.get(j-1).name = temp_customer.name;
+                }
+            }
+        }
 
     }
 

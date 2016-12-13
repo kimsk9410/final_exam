@@ -44,8 +44,11 @@ public class MyBaseAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // need something here
+        for(int i = 0; i < this.getCount(); i++){
+        }
 
-        return itemLayout;
+        //return itemLayout;
+        return convertView;
 
     }
 }

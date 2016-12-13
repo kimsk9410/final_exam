@@ -1,6 +1,7 @@
 package com.example.sm.problem2;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,5 +68,9 @@ public class MyBaseAdapter extends BaseAdapter implements AdapterView.OnItemClic
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // need something here
+        //convertView = mLayoutInflater.inflate(R.layout.list_view_item_layout, parent);
+
+        //여기 수정
+        return convertView;
     }
 }

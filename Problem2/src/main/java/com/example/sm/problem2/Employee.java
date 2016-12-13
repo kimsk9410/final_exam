@@ -1,6 +1,8 @@
 package com.example.sm.problem2;
 
 
+import android.widget.Toast;
+
 //public class Employee /* extends something1 implements something2 */ {
 public class Employee extends Person implements Payment{
 
@@ -20,4 +22,19 @@ public class Employee extends Person implements Payment{
     }
 
     // need something here
+    @Override
+    public void increase(){
+
+        salary += 10000;
+
+    }
+
+    @Override
+    public void decrease(){
+
+        if(salary >= 10000) {
+            salary -= 10000;
+        }
+
+    }
 }
