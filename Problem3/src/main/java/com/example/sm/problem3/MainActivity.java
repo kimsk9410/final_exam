@@ -100,7 +100,7 @@ class Manager extends Person{
 
         // need something here
         for(int i = 0; i < list.size()-1; i++){
-            for(int j = i + 1; j < list.size(); j++){
+            for(int j = 1; j < list.size()-i; j++){
                 if(list.get(j-1).spent_money > list.get(j).spent_money){
                     temp_customer.spent_money = list.get(j).spent_money;
                     temp_customer.name = list.get(j).name;
